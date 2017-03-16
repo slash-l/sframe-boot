@@ -2,7 +2,7 @@
 
 <configuration>
 
-	<property name="LOGBACK_HOME" value="/Users/mumu/project/sframe/sframe-boot/log/sframe_log" />
+	<property name="LOGBACK_HOME" value="/Users/mumu/project/sframe/log/sframe_log" />
 
 	<!-- to console -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
