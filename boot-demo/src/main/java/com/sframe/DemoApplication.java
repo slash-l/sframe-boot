@@ -1,5 +1,6 @@
 package com.sframe;
 
+import com.sframe.component.demo.aop.IUserDao;
 import com.sframe.component.demo.event.MyApplicationEvent;
 import com.sframe.component.demo.init.MyApplicationContextInitializer;
 import org.mybatis.spring.annotation.MapperScan;
@@ -70,6 +71,10 @@ public class DemoApplication extends SpringBootServletInitializer {
         //事件监听
         //参考 demo.event 包
         context.publishEvent(new MyApplicationEvent(new Object()));
+
+        //aop 测试
+        System.out.println(context.getBean(IUserDao.class).getClass());
+        context.getBean(IUserDao.class).add("admin", "123");
 
         logger.info("============= SpringBoot Start Success =============");
     }
