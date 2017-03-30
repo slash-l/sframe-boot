@@ -3,9 +3,8 @@ package com.sframe;
 import com.sframe.component.demo.aop.IUserDao;
 import com.sframe.component.demo.event.MyApplicationEvent;
 import com.sframe.component.demo.init.MyApplicationContextInitializer;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -21,11 +20,10 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @date 2016年7月23日 下午4:15:34 
  * @version V1.0
  */
+@Slf4j
 @SpringBootApplication
 @MapperScan("com.sframe.component.demo.interceptor")
 public class DemoApplication extends SpringBootServletInitializer {
-
-	private final static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
 
     /**
      * 用于 war 部署配置
@@ -73,10 +71,10 @@ public class DemoApplication extends SpringBootServletInitializer {
         context.publishEvent(new MyApplicationEvent(new Object()));
 
         //aop 测试
-        System.out.println(context.getBean(IUserDao.class).getClass());
+        log.info(context.getBean(IUserDao.class).getClass().toString());
         context.getBean(IUserDao.class).add("admin", "123");
 
-        logger.info("============= SpringBoot Start Success =============");
+        log.info("============= SpringBoot Start Success =============");
     }
 
 }
