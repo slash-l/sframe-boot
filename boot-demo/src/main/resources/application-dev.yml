@@ -45,3 +45,6 @@ spring:
       connectionProperties:
           druid.stat.mergeSql: true
           druid.stat.slowSqlMillis: 5000
+
+app:
+  name: spring boot

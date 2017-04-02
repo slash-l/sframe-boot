@@ -1,4 +1,4 @@
-package com.sframe.component.demo.health;
+package com.sframe.component.demo.monitor.health;
 
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;

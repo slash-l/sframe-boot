@@ -75,6 +75,11 @@ spring.aop.proxy-target-class=false 或者不配置，表示使用JDK的动态�
 http://localhost:8080/beans 查看 spring bean
 http://localhost:8080/env   查看目前环境
 http://localhost:8080/health    查看环境健康状况，可以自定义监控状态
+http://localhost:8080/metrics   查看监控信息
 ...
+
+spring 内置的 service
+counterService 用来计数
+gaugeService
 
 
