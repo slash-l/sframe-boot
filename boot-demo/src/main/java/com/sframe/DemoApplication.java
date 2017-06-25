@@ -8,8 +8,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
  * 
@@ -21,8 +22,9 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version V1.0
  */
 @Slf4j
+@ServletComponentScan //配置Druid的监控页面需要用到的注解
+@MapperScan("com.sframe.**.dao")
 @SpringBootApplication
-@MapperScan("com.sframe.component.demo.interceptor")
 public class DemoApplication extends SpringBootServletInitializer {
 
     /**

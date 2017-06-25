@@ -1,23 +1,23 @@
 # sframe demo
 ## spring boot 源代码分析
-1 判断是否是 web 环境
-2 加载所有 classpath 下面的 MATA-INF/spring.factories ApplicationContextIntializer
-3 加载所有 classpath 下面的 MATA-INF/spring.factories ApplicationListener
-4 推断 main 方法的类
-5 开始执行 run 方法
-6 设置 java.awt.headless
+1. 判断是否是 web 环境
+2. 加载所有 classpath 下面的 MATA-INF/spring.factories ApplicationContextIntializer
+3. 加载所有 classpath 下面的 MATA-INF/spring.factories ApplicationListener
+4. 推断 main 方法的类
+5. 开始执行 run 方法
+6. 设置 java.awt.headless
 ......
 
 
 ## spring boot war 形式部署：
-1 pom中将<packaging>jar</packaging> ==> <packaging>war</packaging>
-2 pom中添加tomcat依赖，显示声明scope为provided，这样打包时就不会将tomcat的jar包打到war中
+1. pom中将<packaging>jar</packaging> ==> <packaging>war</packaging>
+2. pom中添加tomcat依赖，显示声明scope为provided，这样打包时就不会将tomcat的jar包打到war中
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-tomcat</artifactId>
 		<scope>provided</scope>
 	</dependency>
-3 继承 SpringBootServletInitializer，重写 configure 方法
+3. 继承 SpringBootServletInitializer，重写 configure 方法
 
 
 ## spring boot中使用servlet的API
@@ -58,9 +58,9 @@ afterCompletion：页面渲染之后调用，一般用于资源清理操作
 
 ## AOP开发流程
 参考 demo.aop 包
-1 spring-boot-starter-aop，加入依赖，默认就开启了AOP的支持
-2 写一个Aspect，封装横切关注点（日志，监控等等），需要配置通知（前置通知、后置通知等等）和 切入点（哪些包的哪些类的哪些方法等等）
-3 这个Aspect需要纳入到spring容器管理，并且需要加入@Aspect
+1. spring-boot-starter-aop，加入依赖，默认就开启了AOP的支持
+2. 写一个Aspect，封装横切关注点（日志，监控等等），需要配置通知（前置通知、后置通知等等）和 切入点（哪些包的哪些类的哪些方法等等）
+3. 这个Aspect需要纳入到spring容器管理，并且需要加入@Aspect
 
 spring.aop.auto配置项决定是否启用AOP，默认启用
 默认是使用基于JDK的动态代理来实现AOP
