@@ -1,5 +1,9 @@
 package com.sframe.component.user.service;
 
+import com.github.pagehelper.PageInfo;
+import com.sframe.component.user.invo.UserInvo;
+import com.sframe.component.user.outvo.UserOutvo;
+
 /**
  * @author mumu
  * @vervion v1.0
@@ -8,5 +12,11 @@ package com.sframe.component.user.service;
  */
 public interface UserService {
 
-    
+    /**
+     * 根据条件查询用户列表数据
+     * @param userInvo
+     * @return
+     */
+    PageInfo<UserOutvo> getUserListByPage(UserInvo userInvo);
+
 }

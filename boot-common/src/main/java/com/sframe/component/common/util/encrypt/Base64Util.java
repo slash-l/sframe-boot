@@ -1,5 +1,6 @@
 package com.sframe.component.common.util.encrypt;
 
+import lombok.NoArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
 
 /**
@@ -8,6 +9,7 @@ import org.apache.commons.codec.binary.Base64;
  * @description Base64 工具类
  * @date 16/9/18 2016, 下午10:47
  */
+@NoArgsConstructor
 public class Base64Util {
 
 //////////////////////////////////// 编码
