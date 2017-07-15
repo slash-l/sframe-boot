@@ -2,6 +2,7 @@ package com.sframe.component.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sframe.component.common.util.KeyGenerator;
 import com.sframe.component.user.bean.UserBean;
 import com.sframe.component.user.bean.UserBeanExample;
 import com.sframe.component.user.dao.UserBeanMapper;
@@ -46,5 +47,15 @@ public class UserServiceImpl implements UserService{
         }).collect(Collectors.toList());
         PageInfo<UserOutvo> userOutvoPageInfo = new PageInfo<>(userOutvoList);
         return userOutvoPageInfo;
+    }
+
+    @Override
+    public String createUser(UserInvo userInvo) {
+        String userId = KeyGenerator.getUuid();
+        UserBean userBean = new UserBean();
+        BeanUtils.copyProperties(userInvo, userBean);
+        userBean.setUserId(userId);
+        int result = userBeanMapper.insert(userBean);
+        return userId;
     }
 }

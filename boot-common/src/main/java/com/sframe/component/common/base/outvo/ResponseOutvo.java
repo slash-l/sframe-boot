@@ -34,8 +34,11 @@ public class ResponseOutvo<T> {
      */
     private T outvo;
 
+
     public ResponseOutvo(String code, String message){
-        this(code, message, null);
+        this.code = code;
+        this.message = message;
+        this.processTime = System.currentTimeMillis() - this.getStartTime();
     }
 
     public ResponseOutvo(String code, String message, T outvo){

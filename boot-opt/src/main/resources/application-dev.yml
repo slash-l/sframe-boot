@@ -58,7 +58,5 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-app:
-  name: spring boot
 
 

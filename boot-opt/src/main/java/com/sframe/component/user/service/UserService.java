@@ -19,4 +19,12 @@ public interface UserService {
      */
     PageInfo<UserOutvo> getUserListByPage(UserInvo userInvo);
 
+    /**
+     * 创建用户
+     * @param userInvo
+     * @return  创建用户的主键
+     */
+    String createUser(UserInvo userInvo);
+
+
 }

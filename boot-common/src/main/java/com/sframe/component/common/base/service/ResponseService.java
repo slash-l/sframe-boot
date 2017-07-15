@@ -40,7 +40,11 @@ public class ResponseService {
 /////////////////////////////   返回失败
 
     public <T> ResponseOutvo<T> getError(String code, Object ... message) {
-        return new ResponseOutvo<>(code, getMessage(code, message), null);
+        return new ResponseOutvo<>(code, getMessage(code, message));
+    }
+
+    public <T> ResponseOutvo<T> getError(String code, String message) {
+        return new ResponseOutvo<>(code, message);
     }
 
     public <T> ResponseOutvo<T> getError(String code) {

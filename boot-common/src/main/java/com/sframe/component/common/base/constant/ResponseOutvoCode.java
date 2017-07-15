@@ -9,5 +9,6 @@ package com.sframe.component.common.base.constant;
 public enum ResponseOutvoCode {
 
     SUCCESS,
+    INPUT_PARAM_ERROR,
     SYSTEM_ERROR;
 }

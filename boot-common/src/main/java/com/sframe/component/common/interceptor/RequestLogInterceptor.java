@@ -27,7 +27,7 @@ public class RequestLogInterceptor implements HandlerInterceptor{
      */
     @Override
     public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+        HttpServletResponse response, Object handler) throws Exception {
 
         request.setAttribute("startTime",System.currentTimeMillis());
 
