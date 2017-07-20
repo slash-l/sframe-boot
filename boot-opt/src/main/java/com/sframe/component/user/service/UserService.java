@@ -1,6 +1,7 @@
 package com.sframe.component.user.service;
 
 import com.github.pagehelper.PageInfo;
+import com.sframe.component.common.base.exception.BusinessException;
 import com.sframe.component.user.invo.UserInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 
@@ -24,7 +25,7 @@ public interface UserService {
      * @param userInvo
      * @return  创建用户的主键
      */
-    String createUser(UserInvo userInvo);
+    String createUser(UserInvo userInvo) throws BusinessException;
 
 
 }

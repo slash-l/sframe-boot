@@ -3,6 +3,7 @@ package com.sframe.component.user.controller;
 import com.github.pagehelper.PageInfo;
 import com.sframe.component.common.base.constant.ResponseOutvoCode;
 import com.sframe.component.common.base.controller.BaseController;
+import com.sframe.component.common.base.exception.BusinessException;
 import com.sframe.component.common.base.outvo.ResponseOutvo;
 import com.sframe.component.user.constant.UserUrl;
 import com.sframe.component.user.invo.UserInvo;
@@ -37,7 +38,7 @@ public class UserController extends BaseController{
     }
 
     @PostMapping(value = UserUrl.USER_INFO)
-    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserInvo userInvo, BindingResult bindingResult){
+    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserInvo userInvo, BindingResult bindingResult) throws BusinessException {
         if(bindingResult.hasErrors()){
             return ResponseEntity.badRequest().body(super.getResponseService().
                     getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));

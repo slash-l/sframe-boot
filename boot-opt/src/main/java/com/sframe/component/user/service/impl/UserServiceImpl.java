@@ -2,15 +2,18 @@ package com.sframe.component.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sframe.component.common.base.exception.BusinessException;
 import com.sframe.component.common.util.KeyGenerator;
 import com.sframe.component.user.bean.UserBean;
 import com.sframe.component.user.bean.UserBeanExample;
+import com.sframe.component.user.constant.UserExceptionCode;
 import com.sframe.component.user.dao.UserBeanMapper;
 import com.sframe.component.user.invo.UserInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 import com.sframe.component.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,12 +53,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String createUser(UserInvo userInvo) {
+    public String createUser(UserInvo userInvo) throws BusinessException{
         String userId = KeyGenerator.getUuid();
         UserBean userBean = new UserBean();
         BeanUtils.copyProperties(userInvo, userBean);
         userBean.setUserId(userId);
         int result = userBeanMapper.insert(userBean);
+        if(result < 0){
+            throw new BusinessException(UserExceptionCode.CREATE_USER_ERROR.name());
+        }
         return userId;
     }
 }

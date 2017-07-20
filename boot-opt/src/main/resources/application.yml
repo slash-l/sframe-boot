@@ -3,6 +3,5 @@ spring:
   profiles:
     active: dev
 
-
 app:
   name: sframe-opt

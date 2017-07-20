@@ -1,6 +1,7 @@
 package com.sframe.component.common.interceptor;
 
 import com.sframe.component.common.base.constant.ResponseOutvoCode;
+import com.sframe.component.common.base.exception.BusinessException;
 import com.sframe.component.common.base.outvo.ResponseOutvo;
 import com.sframe.component.common.base.service.ResponseService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +29,19 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ResponseOutvo conversionErrorHandler(Exception ex) {
+    public ResponseOutvo conversionExceptionHandler(Exception ex) {
         //记录日志
         log.error(ex.getMessage(), ex);
         return responseService.getError(ResponseOutvoCode.SYSTEM_ERROR.name());
+    }
+
+    @ExceptionHandler(value = {BusinessException.class})
+    @ResponseStatus(value = HttpStatus.EXPECTATION_FAILED)
+    @ResponseBody
+    public ResponseOutvo conversionBusinessExceptionHandler(Exception ex) {
+        //记录日志
+        log.error(ex.getMessage(), ex);
+        return responseService.getError(ex.getMessage());
     }
 
 }
