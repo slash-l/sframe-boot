@@ -10,7 +10,6 @@ import com.sframe.component.user.invo.UserInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 import com.sframe.component.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
