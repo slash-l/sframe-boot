@@ -13,14 +13,11 @@ import javax.validation.constraints.Pattern;
  * @author mumu
  * @vervion v1.0
  * @description
- * @date 2017/7/3 2017, 下午10:16
+ * @date 2017/7/24 2017, 上午12:03
  */
 @Data
-public class UserInvo extends PageInvo{
+public class UserQueryInvo extends PageInvo {
 
-    private String userId;
-
-    @NotBlank(message = "${user.loginName.notBlank}")
     @Length(min = 5, max = 20)
     private String loginName;
 

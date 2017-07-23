@@ -1,0 +1,8 @@
+# 指定启动使用哪个配置文件
+spring:
+  profiles:
+    active: dev
+
+app:
+  name: sframe-mock-api
+

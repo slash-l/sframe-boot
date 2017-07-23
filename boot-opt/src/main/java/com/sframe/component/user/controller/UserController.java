@@ -6,7 +6,8 @@ import com.sframe.component.common.base.controller.BaseController;
 import com.sframe.component.common.base.exception.BusinessException;
 import com.sframe.component.common.base.outvo.ResponseOutvo;
 import com.sframe.component.user.constant.UserUrl;
-import com.sframe.component.user.invo.UserInvo;
+import com.sframe.component.user.invo.UserCreateInvo;
+import com.sframe.component.user.invo.UserQueryInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 import com.sframe.component.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +32,13 @@ public class UserController extends BaseController{
     private UserService userService;
 
     @GetMapping(value = UserUrl.USER_PAGE)
-    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(UserInvo userInvo){
-        PageInfo<UserOutvo> userOutvoPageInfo = this.userService.getUserListByPage(userInvo);
+    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(UserQueryInvo userQueryInvo){
+        PageInfo<UserOutvo> userOutvoPageInfo = this.userService.getUserListByPage(userQueryInvo);
         return ResponseEntity.ok(super.getResponseService().getSuccess(userOutvoPageInfo));
     }
 
     @PostMapping(value = UserUrl.USER_INFO)
-    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserInvo userInvo, BindingResult bindingResult) throws BusinessException {
+    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserCreateInvo userInvo, BindingResult bindingResult) throws BusinessException {
         if(bindingResult.hasErrors()){
             return ResponseEntity.badRequest().body(super.getResponseService().
                     getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));

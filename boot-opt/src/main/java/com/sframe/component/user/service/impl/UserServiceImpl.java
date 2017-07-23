@@ -8,12 +8,12 @@ import com.sframe.component.user.bean.UserBean;
 import com.sframe.component.user.bean.UserBeanExample;
 import com.sframe.component.user.constant.UserExceptionCode;
 import com.sframe.component.user.dao.UserBeanMapper;
-import com.sframe.component.user.invo.UserInvo;
+import com.sframe.component.user.invo.UserCreateInvo;
+import com.sframe.component.user.invo.UserQueryInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 import com.sframe.component.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService{
     private UserBeanMapper userBeanMapper;
 
     @Override
-    public PageInfo<UserOutvo> getUserListByPage(UserInvo userInvo) {
+    public PageInfo<UserOutvo> getUserListByPage(UserQueryInvo userQueryInvo) {
         log.info("query user list");
-        PageHelper.startPage(userInvo.getPageNum(), userInvo.getPageSize());
+        PageHelper.startPage(userQueryInvo.getPageNum(), userQueryInvo.getPageSize());
         //查询条件使用 example 组装
         UserBeanExample example = new UserBeanExample();
         //...
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String createUser(UserInvo userInvo) throws BusinessException{
+    public String createUser(UserCreateInvo userInvo) throws BusinessException{
         String userId = KeyGenerator.getUuid();
         UserBean userBean = new UserBean();
         BeanUtils.copyProperties(userInvo, userBean);

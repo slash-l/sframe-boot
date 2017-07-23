@@ -2,6 +2,8 @@ package com.sframe.component.common.base.invo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author mumu
  * @vervion v1.0
@@ -9,7 +11,7 @@ import lombok.Data;
  * @date 2017/7/3 2017, 下午10:11
  */
 @Data
-public class PageInvo {
+public class PageInvo implements Serializable {
 
     /**
      * 每页显示数据条数，默认10条
