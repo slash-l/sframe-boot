@@ -32,18 +32,22 @@ public class UserController extends BaseController{
     private UserService userService;
 
     @GetMapping(value = UserUrl.USER_PAGE)
-    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(UserQueryInvo userQueryInvo){
+    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(@Validated UserQueryInvo userQueryInvo, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(super.getResponseService().
+                    getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));
+        }
         PageInfo<UserOutvo> userOutvoPageInfo = this.userService.getUserListByPage(userQueryInvo);
         return ResponseEntity.ok(super.getResponseService().getSuccess(userOutvoPageInfo));
     }
 
     @PostMapping(value = UserUrl.USER_INFO)
-    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserCreateInvo userInvo, BindingResult bindingResult) throws BusinessException {
+    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserCreateInvo userCreateInvo, BindingResult bindingResult) throws BusinessException {
         if(bindingResult.hasErrors()){
             return ResponseEntity.badRequest().body(super.getResponseService().
                     getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));
         }
-        String userId = userService.createUser(userInvo);
+        String userId = userService.createUser(userCreateInvo);
         return ResponseEntity.ok(super.getResponseService().getSuccess(userId));
     }
 

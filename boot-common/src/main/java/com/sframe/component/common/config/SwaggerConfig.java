@@ -1,17 +1,26 @@
 package com.sframe.component.common.config;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+import com.sframe.component.common.base.constant.ResponseOutvoCode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.List;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
@@ -37,7 +46,12 @@ public class SwaggerConfig {
                 .paths(Predicates.or(
                         PathSelectors.regex("/v1"),
                         PathSelectors.regex("/v1/.*")))//过滤的接口
-                .build();
+                .build()
+                .globalResponseMessage(RequestMethod.GET, commonResponseMessage())
+                .globalResponseMessage(RequestMethod.POST, commonResponseMessage())
+                .globalResponseMessage(RequestMethod.PUT, commonResponseMessage())
+                .globalResponseMessage(RequestMethod.DELETE, commonResponseMessage())
+                .globalResponseMessage(RequestMethod.PATCH, commonResponseMessage());
     }
 
     private ApiInfo sframeApiInfo() {
@@ -50,6 +64,17 @@ public class SwaggerConfig {
                 ""//网站链接
         );
         return apiInfo;
+    }
+
+    private List<ResponseMessage> commonResponseMessage(){
+        return Lists.newArrayList(
+                new ResponseMessageBuilder().code(HttpStatus.OK.value()).message("成功")
+                        .responseModel(new ModelRef(ResponseOutvoCode.SUCCESS.name())).build(),
+                new ResponseMessageBuilder().code(HttpStatus.BAD_REQUEST.value()).message("参数错误")
+                        .responseModel(new ModelRef("参数错误")).build(),
+                new ResponseMessageBuilder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).message("系统错误")
+                        .responseModel(new ModelRef(ResponseOutvoCode.SYSTEM_ERROR.name())).build()
+        );
     }
 
 }

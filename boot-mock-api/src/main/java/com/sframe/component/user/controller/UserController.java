@@ -8,6 +8,7 @@ import com.sframe.component.common.base.outvo.ResponseOutvo;
 import com.sframe.component.common.util.KeyGenerator;
 import com.sframe.component.user.constant.UserUrl;
 import com.sframe.component.user.invo.UserCreateInvo;
+import com.sframe.component.user.invo.UserQueryInvo;
 import com.sframe.component.user.outvo.UserOutvo;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +33,21 @@ import java.util.List;
 public class UserController extends BaseController{
 
     @ApiOperation(value="查询系统用户信息",notes="查询系统用户信息",httpMethod="GET",produces= MediaType.APPLICATION_JSON_VALUE)
-    @ApiResponses(value={
-            @ApiResponse(code=200, message = "SUCCESS"),
-            @ApiResponse(code=400, response = ResponseOutvo.class, message = "参数错误"),
-            @ApiResponse(code=500, message = "系统错误")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="loginName",paramType="query",dataType="string",value="用户登录名"),
+            @ApiImplicitParam(name="fromAge",paramType="query",dataType="int",value="用户查询开始年龄"),
+            @ApiImplicitParam(name="toAge",paramType="query",dataType="int",value="用户查询结束年龄"),
+            @ApiImplicitParam(name="email",paramType="query",dataType="string",value="用户email"),
+            @ApiImplicitParam(name="mobile",paramType="query",dataType="int",value="用户手机号"),
+            @ApiImplicitParam(name="pageSize",paramType="query",dataType="int",value="每页显示记录数"),
+            @ApiImplicitParam(name="pageNum",paramType="query",dataType="int",value="查询页码")
     })
     @GetMapping(value = UserUrl.USER_PAGE)
-    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(UserCreateInvo userInvo){
+    public ResponseEntity<ResponseOutvo<PageInfo<UserOutvo>>> getUserPage(@Validated UserQueryInvo userQueryInvo, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(super.getResponseService().
+                    getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));
+        }
         PageInfo<UserOutvo> userOutvoPageInfo = new PageInfo();
         List<UserOutvo> userOutvoList = new ArrayList();
         UserOutvo userOutvo1 = new UserOutvo();
@@ -66,19 +75,8 @@ public class UserController extends BaseController{
     }
 
     @ApiOperation(value="创建系统用户",notes="创建系统用户",httpMethod="POST",produces= MediaType.APPLICATION_JSON_VALUE)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="loginName",required=true,paramType="query",dataType="string",value="用户名"),
-            @ApiImplicitParam(name="age",required=true,paramType="query",dataType="Integer",value="年龄"),
-            @ApiImplicitParam(name="email",required=true,paramType="query",dataType="string",value="email"),
-            @ApiImplicitParam(name="mobile",required=true,paramType="query",dataType="string",value="手机号")
-    })
-    @ApiResponses(value={
-            @ApiResponse(code=200, message = "SUCCESS"),
-            @ApiResponse(code=400, response = ResponseOutvo.class, message = "参数错误"),
-            @ApiResponse(code=500, message = "系统错误")
-    })
     @PostMapping(value = UserUrl.USER_INFO)
-    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserCreateInvo userInvo, BindingResult bindingResult) throws BusinessException {
+    public ResponseEntity<ResponseOutvo<String>> createUser(@Validated @RequestBody UserCreateInvo userCreateInvo, BindingResult bindingResult) throws BusinessException {
         if(bindingResult.hasErrors()){
             return ResponseEntity.badRequest().body(super.getResponseService().
                     getError(ResponseOutvoCode.INPUT_PARAM_ERROR.name(), bindingResult.getFieldError().getDefaultMessage()));
