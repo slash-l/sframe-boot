@@ -13,7 +13,18 @@ CREATE TABLE IF NOT EXISTS `t_demo_student` (
   `real_name` VARCHAR(50) NULL COMMENT '学生真实姓名',
   `student_age` INT NULL COMMENT '学生年龄',
   `student_desc` VARCHAR(1000) NULL COMMENT '学生描述',
-  PRIMARY KEY (`student_id`));
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/** t_user 系统用户表*/
+CREATE TABLE `t_user` (
+  `user_id` char(36) NOT NULL,
+  `login_name` varchar(50) NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `mobile` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /**
 # In your Quartz properties file, you'll need to set
