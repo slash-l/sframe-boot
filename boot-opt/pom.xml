@@ -18,4 +18,13 @@
         <java.version>1.8</java.version><!-- 官方推荐 -->
     </properties>
 
+    <dependencies>
+        <!-- boot common -->
+        <dependency>
+            <groupId>com.sframe</groupId>
+            <artifactId>boot-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

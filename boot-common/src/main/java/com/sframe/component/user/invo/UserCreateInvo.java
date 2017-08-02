@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * @author mumu
@@ -18,7 +19,7 @@ import javax.validation.constraints.Pattern;
  */
 @ApiModel(value = "创建系统用户的请求入参")
 @Data
-public class UserCreateInvo {
+public class UserCreateInvo implements Serializable {
 
     /** 用户登录名 */
     @ApiModelProperty(value = "用户登录名", required = true)
