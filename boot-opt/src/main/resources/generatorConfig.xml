@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+  <!-- !!!! Driver Class Path !!!! -->
+
+  <context id="context" targetRuntime="MyBatis3">
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+    <commentGenerator>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <!-- !!!! Database Configurations !!!! -->
+    <jdbcConnection
+            driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://jinyutao-host1.sh2.newtouch.com:45040/sframe_db?useSSL=false"
+            userId="sframe"
+            password="123456"/>
+
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+
+    <!-- !!!! Model Configurations !!!! -->
+    <javaModelGenerator targetPackage="com.sframe.component.user.bean"
+                        targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <!-- !!!! Mapper XML Configurations !!!! -->
+    <!--<sqlMapGenerator targetPackage="cn.newtouch.step.work.module.user.dao"
+                     targetProject="src/main/resources">
+        <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+-->
+    <!-- !!!! Mapper Interface Configurations !!!! -->
+    <javaClientGenerator targetPackage="com.sframe.component.user.dao"
+                         targetProject="src/main/java" type="ANNOTATEDMAPPER">
+      <property name="enableSubPackages" value="false"/>
+    </javaClientGenerator>
+
+    <!-- !!!! Table Configurations !!!! -->
+    <table tableName="t_user" domainObjectName="UserBean" >
+    </table>
+  </context>
+</generatorConfiguration>

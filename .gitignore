@@ -1,0 +1,8 @@
+*.class
+/.idea
+/*.properties
+/*.properties.lock
+*.iml
+/boot-*/target/*
+/boot-*/.idea
+/boot-*/.DS_Store
