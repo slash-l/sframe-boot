@@ -6,3 +6,5 @@
 /boot-*/target/*
 /boot-*/.idea
 /boot-*/.DS_Store
+/frontend/node_modules/*
+
