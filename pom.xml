@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.6.RELEASE</version>
+            <version>5.2.18.RELEASE</version>
         </dependency>
 
         <!-- 支持 Web 应用开发，包含Tomcat spring-mvc -->
@@ -150,13 +150,13 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.2.2</version>
+            <version>2.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.2.2</version>
+            <version>2.3.1</version>
         </dependency>
 
     </dependencies>
